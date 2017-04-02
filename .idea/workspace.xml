@@ -21,36 +21,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="javascript-objects.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="javascript-objects.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascript-objects.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="706">
-                <caret line="219" column="3" selection-start-line="219" selection-start-column="3" selection-end-line="219" selection-end-column="3" />
+              <first_editor relative-caret-position="631">
+                <caret line="224" column="0" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
                 <folding>
-                  <marker date="1491108557000" expanded="true" signature="460:508" ph="{&quot;make&quot;: &quot;Ford&quot;...}" />
-                  <marker date="1491108557000" expanded="true" signature="460:518" ph="{&quot;make&quot;: &quot;Ford&quot;...}" />
-                  <marker date="1491108557000" expanded="true" signature="2576:2724" ph="{&quot;name&quot;: &quot;Grendel&quot;...}" />
-                  <marker date="1491108557000" expanded="true" signature="2659:2722" ph="{...}" />
-                  <marker date="1491108557000" expanded="true" signature="2971:3026" ph="{...}" />
-                  <marker date="1491108557000" expanded="true" signature="3838:4017" ph="{...}" />
-                  <marker date="1491108557000" expanded="true" signature="3952:4015" ph="{...}" />
-                  <marker date="1491108557000" expanded="true" signature="4623:4655" ph="{...}" />
-                  <marker date="1491108557000" expanded="true" signature="6244:6354" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="6507:6619" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="6652:6748" ph="{...}" />
-                  <marker date="1491108557000" expanded="true" signature="7084:7158" ph="{...}" />
-                  <marker date="1491108557000" expanded="true" signature="7786:7867" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="7809:7842" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="7809:7862" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="7809:7867" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="8105:8123" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="8105:8132" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="8105:8184" ph="//..." />
-                  <marker date="1491108557000" expanded="true" signature="8153:8184" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="460:508" ph="{&quot;make&quot;: &quot;Ford&quot;...}" />
+                  <marker date="1491108831000" expanded="true" signature="460:518" ph="{&quot;make&quot;: &quot;Ford&quot;...}" />
+                  <marker date="1491108831000" expanded="true" signature="2576:2724" ph="{&quot;name&quot;: &quot;Grendel&quot;...}" />
+                  <marker date="1491108831000" expanded="true" signature="2659:2722" ph="{...}" />
+                  <marker date="1491108831000" expanded="true" signature="2971:3026" ph="{...}" />
+                  <marker date="1491108831000" expanded="true" signature="3838:4017" ph="{...}" />
+                  <marker date="1491108831000" expanded="true" signature="3952:4015" ph="{...}" />
+                  <marker date="1491108831000" expanded="true" signature="4623:4655" ph="{...}" />
+                  <marker date="1491108831000" expanded="true" signature="6244:6354" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="6507:6619" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="6652:6748" ph="{...}" />
+                  <marker date="1491108831000" expanded="true" signature="7084:7158" ph="{...}" />
+                  <marker date="1491108831000" expanded="true" signature="7786:7867" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="7809:7842" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="7809:7862" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="7809:7867" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="8105:8123" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="8105:8132" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="8105:8184" ph="//..." />
+                  <marker date="1491108831000" expanded="true" signature="8153:8184" ph="//..." />
                 </folding>
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -61,6 +71,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/javascript-objects.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -185,12 +196,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1491088632819</updated>
-      <workItem from="1491088634020" duration="7756000" />
+      <workItem from="1491088634020" duration="8124000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7756000" />
+    <option name="totallyTimeSpent" value="8124000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1074" y="156" width="1732" height="1174" extended-state="0" />
@@ -234,32 +245,40 @@
     <entry file="file://$PROJECT_DIR$/javascript-objects.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="706">
-            <caret line="219" column="3" selection-start-line="219" selection-start-column="3" selection-end-line="219" selection-end-column="3" />
+          <first_editor relative-caret-position="631">
+            <caret line="224" column="0" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
             <folding>
-              <marker date="1491108557000" expanded="true" signature="460:508" ph="{&quot;make&quot;: &quot;Ford&quot;...}" />
-              <marker date="1491108557000" expanded="true" signature="460:518" ph="{&quot;make&quot;: &quot;Ford&quot;...}" />
-              <marker date="1491108557000" expanded="true" signature="2576:2724" ph="{&quot;name&quot;: &quot;Grendel&quot;...}" />
-              <marker date="1491108557000" expanded="true" signature="2659:2722" ph="{...}" />
-              <marker date="1491108557000" expanded="true" signature="2971:3026" ph="{...}" />
-              <marker date="1491108557000" expanded="true" signature="3838:4017" ph="{...}" />
-              <marker date="1491108557000" expanded="true" signature="3952:4015" ph="{...}" />
-              <marker date="1491108557000" expanded="true" signature="4623:4655" ph="{...}" />
-              <marker date="1491108557000" expanded="true" signature="6244:6354" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="6507:6619" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="6652:6748" ph="{...}" />
-              <marker date="1491108557000" expanded="true" signature="7084:7158" ph="{...}" />
-              <marker date="1491108557000" expanded="true" signature="7786:7867" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="7809:7842" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="7809:7862" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="7809:7867" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="8105:8123" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="8105:8132" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="8105:8184" ph="//..." />
-              <marker date="1491108557000" expanded="true" signature="8153:8184" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="460:508" ph="{&quot;make&quot;: &quot;Ford&quot;...}" />
+              <marker date="1491108831000" expanded="true" signature="460:518" ph="{&quot;make&quot;: &quot;Ford&quot;...}" />
+              <marker date="1491108831000" expanded="true" signature="2576:2724" ph="{&quot;name&quot;: &quot;Grendel&quot;...}" />
+              <marker date="1491108831000" expanded="true" signature="2659:2722" ph="{...}" />
+              <marker date="1491108831000" expanded="true" signature="2971:3026" ph="{...}" />
+              <marker date="1491108831000" expanded="true" signature="3838:4017" ph="{...}" />
+              <marker date="1491108831000" expanded="true" signature="3952:4015" ph="{...}" />
+              <marker date="1491108831000" expanded="true" signature="4623:4655" ph="{...}" />
+              <marker date="1491108831000" expanded="true" signature="6244:6354" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="6507:6619" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="6652:6748" ph="{...}" />
+              <marker date="1491108831000" expanded="true" signature="7084:7158" ph="{...}" />
+              <marker date="1491108831000" expanded="true" signature="7786:7867" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="7809:7842" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="7809:7862" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="7809:7867" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="8105:8123" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="8105:8132" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="8105:8184" ph="//..." />
+              <marker date="1491108831000" expanded="true" signature="8153:8184" ph="//..." />
             </folding>
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
