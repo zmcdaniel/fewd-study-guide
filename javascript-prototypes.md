@@ -141,14 +141,66 @@ console.log(unassignedTestAccount.__proto__); // Object {constructor: function}
 
 Essentially, we are looking one up on the hierarchy to see who the prototype parent is. Steve Jobs is an Admin -- where does Admin inherit from? unassignedTestAccount is a User -- where does User inherit from?
 
-##### Important takeaways
+##### In a nutshell...
 
 1. If an object is created with an object literal (`var obj = {};`) or uses the Object constructor (`var obj = new Object();`), the prototype attribute / prototype object is `Object.prototype` and it inherits all properties and methods from it.
 2. If an object is created with a different constructor, like `new Dog()`, `new Pony()`, or `new Guy()`, it inherits from `Dog.prototype`, `Pony.prototype`, or `Guy.prototype` -- namely the constructor for all of the above. 
 
-### Why is prototype so important anyway?
+### Summary of prototypes and their importance to Javascript
 
+There are two important ways the prototype is used in Javascript. Let's go over them one more time, just to drive it home.
 
+1. **Prototype property**: great for inheritance!
+    - Since Javascript does not have *classical inheritance* like most object oriented languages, inheritance is made possible through the prototype property.
+    - What is inheritance exactly?
+        - A programming paradigm where objects (or Classes in some languages) can inherit properties and methods from other objects (or Classes).
+        - For example, you can create a `Reptile` function (which is an object, because all functions in JS are objects) and add properties and methods that will apply to all instances created from the `Reptile` prototype.
+    ```javascript
+    
+    // Let's create a Reptile 'class' with properties that most Reptiles have
+    function Reptile(){
+       this.reproduction = 'eggs';
+       this.blood = 'cold-blooded';
+    };
+ 
+    // Adding a method to the Reptile prototype to show the characteristics in the console
+    Reptile.prototype.showCharacteristics = function() {
+       console.log("I am a " + this.name + ". I am " + this.blood);
+       if (this.reproduction == 'eggs') {
+           console.log("I reproduce by laying " + this.reproduction);
+        } else {
+           // Some reptiles have alternative ways besides eggs! Just in case, let's add this conditional
+           console.log("I actually reproduce via " + this.reproduction); 
+        }
+    };
+ 
+    // Now we are creating a constructor for a new Snake prototype
+    function Snake(snakeName) {
+       this.name = snakeName;
+    }
+ 
+    // Snake will inherit its prototype attributes / prototype object from the Reptile constructor in addition to its own
+    Snake.prototype = new Reptile();
+ 
+    var rattlesnake = new Snake("rattlesnake");
+    var cobra = new Snake("cobra");
+    
+    rattlesnake.showCharacteristics();
+    cobra.showCharacteristics();
+ 
+    // We can change the prototype property for reproduction on this cobra instance but it will still be the same for other instances of the Snake / Reptile class
+    rattlesnake.reproduction = 'live birth';
+    
+    rattlesnake.showCharacteristics();
+    cobra.showCharacteristics();
+    ```
+    * Note that `showCharacteristics` was inherited by `cobra` and `rattlesnake` even though they were defined way up in Reptile. The prototype properties still got passed down the parent-child hierarchy!
+2. **Prototype attribute**: great for accessing the properties and methods on objects
+    * Also called the **prototype object**. This is the "parent" object from where the inherited properties were originally defined.
+        * In the example above, the prototype attribute / object of `Snake` is `Reptile` and all its associated prototype properties.
+    * If you want to access the property of an object, start on the object itself. Not there? The Javascript runtime will move one up the chain and look on the object's prototype. It will continue to move up the prototype hierarchy chain, from the 'father' to the 'grandfather' to the 'great-grandfather'. If it's not found, then the property does not exist and `undefined` is returned.
+    * The ancestor to all Objects is `Object.prototype`. For example: `hasOwnProperty()`, `isPrototypeOf()`, `propertyIsEnumerable()`, `toLocaleString()`, `toString()`, and `valueOf()`
+        * All built-in constructors (`Array ()`, `Number ()`, `String ()`, etc.) were created from the Object constructor, and as such their prototype is Object.prototype.
 
 
 ### Sources
