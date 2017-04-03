@@ -223,8 +223,8 @@ console.log(parsedRequest);
 // }
 ```
 
-### Useful sources
+### Sources
 
-[Javascript Constructors and Prototypes](http://tobyho.com/2010/11/22/javascript-constructors-and/)
-[Javascript Objects in Detail](http://javascriptissexy.com/javascript-objects-in-detail/)
-[OOP with Constructors - General Assembly WDI](https://wdi_sea.gitbooks.io/notes/content/02-js-jquery/js-prototypes/02constructors.html)
+* [Javascript Constructors and Prototypes](http://tobyho.com/2010/11/22/javascript-constructors-and/)
+* [Javascript Objects in Detail](http://javascriptissexy.com/javascript-objects-in-detail/)
+* [OOP with Constructors - General Assembly WDI](https://wdi_sea.gitbooks.io/notes/content/02-js-jquery/js-prototypes/02constructors.html)
