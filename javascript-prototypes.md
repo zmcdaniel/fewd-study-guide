@@ -156,7 +156,6 @@ There are two important ways the prototype is used in Javascript. Let's go over 
         - A programming paradigm where objects (or Classes in some languages) can inherit properties and methods from other objects (or Classes).
         - For example, you can create a `Reptile` function (which is an object, because all functions in JS are objects) and add properties and methods that will apply to all instances created from the `Reptile` prototype.
     ```javascript
-    
     // Let's create a Reptile 'class' with properties that most Reptiles have
     function Reptile(){
        this.reproduction = 'eggs';
