@@ -4,6 +4,8 @@
 
 Put simply as closure is a function that exists within another function and has access to the encapsulating function's variables. Make sure you understand the idea of scoping beforehand!
 
+Closures are any function that keeps reference to variables from its parent’s scope *even after the parent has returned*.
+
 Closures have three scope chain:
 1. It's own scope. (variables defined within its own curly brackets)
 2. The outer function's scope (variables within the function surrounding it)
@@ -44,6 +46,25 @@ $(function() {
 
 ## Closure rules
 
+### Closures can refer to variables outside the current function
+
+In the example below, `printLocation()` refers to the `state` variable and the `city` parameter of the enclosing/parent `setLocation()` function. As a result, when `setLocation()` is called, `printLocation()` uses the variables and parameters of its parent to print "You are in Seattle, Washington".
+
+```javascript
+function setLocation(city) {
+    var state = "Washington";
+    
+    function printLocation() {
+        return "You are in " + city + ", " + state;
+    }
+    
+    return printLocation();
+}
+
+console.log(setLocation("Seattle")); // "You are in Seattle, Washington"
+```
+
+
 ### Closures have access to the outer function's variable*even after*the outer function returns 
 
 The inner function still has access to the outer function’s variables even after the outer function has returned. 
@@ -55,56 +76,66 @@ When functions in JavaScript execute, they use the same scope chain that was in 
 Therefore, you can call the inner function later in your program. 
 
 ```javascript
-function showFormalGreeting(firstName){
-    var greeting = "Good day ";
+function setLocation(city){
+    var state = "Washington"
     
      // this inner function has access to the outer function's variables, including the parameter​
-    function showLastName(lastName) {
-        return greeting + firstName + " " + lastName;
+    function printLocation() {
+        return "You are in " + city + ", " + state;
     }
     
-    return showLastName;
+    return printLocation;
 }
 
-// At this juncture, the showFormalGreeting outer function has returned
-var myName = showFormalGreeting("Zoe");
+// At this juncture, the setLocation outer function has returned
+var myLocation = setLocation("Seattle");
 
 
-​// The closure (lastName) is called here after the outer function has returned above​
+​// The closure (printLocation) is called here after the outer function has returned above​
 ​// Yet, the closure still has access to the outer function's variables and parameter​
-myName("McDaniel"); // "Good day Zoe McDaniel"
+myLocation(); // "You are in Seattle, Washington"
 ```
+
+You see, `printLocation()` is *returned* inside the outer `setLocation()` function instead of being immediately called. The value of `currentLocation` is in the inner `printLocation()` function.
+
+The inner `printLocation()` gets executed outside of its lexical scope and still "remembers" its variable (`state`) and parameter (`city`) even though `setLocation()` has completed.
+
+Closures remember their surrounding scope (the outer function) even when it's executed outside its lexical scope! You can call it at any time later in your program!
 
 ### Closures store*references*to the outer function's variables
 
 Not the actual value, but the reference! If the outer function's variable changes before the closure is called, things start to get really interesting
 
 ```javascript
-function myId() {
-    var myId = 1;
+function cityLocation() {
+    var city = "Seattle";
     
     // Returning an object with inner functions
     // The inner functions are closures and have access to the outer vars
     return {
-        getId: function() {
-            // This will return whatever the current value of myId is.
-            return myId;
+        getCity: function() {
+            // This will return whatever the current value of city is.
+            return city;
         },
-        setId: function(newId) {
+        setCity: function(newCity) {
             // This can change the outer variable
-            myId = newId;
+            city = newCity;
         }
     }
 }
 
-var zoeId = myId(); // myId() is called
+var zoeCity = cityLocation(); // myId() is called
 
-zoeId.getId();  // 1
-zoeId.setId(2); // Changes myId in outer function to 2
-zoeId.getId();  // 2
+zoeCity.getCity(); // "Seattle"
+zoeCity.setCity("Bainbridge");
+zoeCity.getCity(); // "Bainbridge"
 ```
 
-### Closures gone wild
+Closures can both read and update their stored variables. The updates made are also visible to the closures, as seen in the `getCity()` method.
+
+One more time: closures store *references* to varibles, *not values*!
+
+## Closures gone wild
 
 Because closures have access to the update values of the outer function's variables, strange things can happen when you use `for` loops in the outer function.
 
@@ -146,30 +177,30 @@ function celebrityIDCreator (theCelebrities) {
         theCelebrities[i]["id"] = function (j)  { 
             return function () {
                 
-                // each iteration of the for loop passes the current value of i 
+                // each iteration of the for loop passes the current value of i
                 // into this IIFE and it saves the correct value to the array​
             
                 return uniqueID + j;
-            // BY adding () at the end of this function, we are executing it 
-            // immediately and returning just the value of uniqueID + j, 
-            // instead of returning a function.​    
+            // BY adding () at the end of this function, we are executing it
+            // immediately and returning just the value of uniqueID + j,
+            // instead of returning a function.
             } ()
             
-        // immediately invoke the function passing the i variable as a parameter​    
+        // immediately invoke the function passing the i variable as a parameter
         } (i);
     }
-​
+
     return theCelebrities;
-}
-​
-​var actionCelebs = [{name:"Stallone", id:0}, {name:"Cruise", id:0}, {name:"Willis", id:0}];
-​
-​var createIdForActionCelebs = celebrityIDCreator (actionCelebs);
-​
-​var stalloneID = createIdForActionCelebs [0];
- console.log(stalloneID.id); // 100​
-​
-​var cruiseID = createIdForActionCelebs [1]; 
+};
+
+var actionCelebs = [{name:"Stallone", id:0}, {name:"Cruise", id:0}, {name:"Willis", id:0}];
+
+var createIdForActionCelebs = celebrityIDCreator (actionCelebs);
+
+var stalloneID = createIdForActionCelebs [0];
+console.log(stalloneID.id); // 100​
+
+var cruiseID = createIdForActionCelebs [1]; 
 console.log(cruiseID.id); // 101
 ```
 
@@ -177,3 +208,4 @@ console.log(cruiseID.id); // 101
 
 * [Understranding Javascript Closures with Ease - Javascript is Sexy](http://javascriptissexy.com/understand-javascript-closures-with-ease/)
 * [Javascript Closures - W3Schools](https://www.w3schools.com/js/js_function_closures.asp)
+* [Demystifying Closures, Callbacks, and IIFEs - Sitepoint](https://www.sitepoint.com/demystifying-javascript-closures-callbacks-iifes/)
