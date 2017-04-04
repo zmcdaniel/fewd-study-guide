@@ -236,3 +236,8 @@ p_client.open(function(err, p_client) {
 Solutions for this:
 1. Name your functions and declare them. Then, pass the name of the function as the callback instead of building out all these anonymous functions within the parameter of the main function.
 2. Use *modularity*. Seperate your code into modules so you can export a section of code that does a specific, particular job. Import the module as needed. 
+
+## Sources
+
+* [Understanding Javascript Callbacks and How to Use Them - Javascript is Sexy](http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/)
+* [Demystifying Javascipt Closures, Callbacks, and IIFEs - Sitepoint](https://www.sitepoint.com/demystifying-javascript-closures-callbacks-iifes/)
