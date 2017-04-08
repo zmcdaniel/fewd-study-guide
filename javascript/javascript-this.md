@@ -41,3 +41,10 @@ doggo.getName(); // "Pooch"
 
 In the case of `getName()`, the `this` refers to the `doggo` object that is invoking `getName()`. 
 
+Here is an example of `this` in jQuery:
+
+```javascript
+$
+
+```
+
