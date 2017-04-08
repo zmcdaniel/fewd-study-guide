@@ -76,7 +76,7 @@ When functions in JavaScript execute, they use the same scope chain that was in 
 Therefore, you can call the inner function later in your program. 
 
 ```javascript
-function setLocation(city){
+function setNewLocation(city){
     var state = "Washington"
     
      // this inner function has access to the outer function's variables, including the parameter​
@@ -85,15 +85,16 @@ function setLocation(city){
     }
     
     return printLocation;
-}
+};
 
 // At this juncture, the setLocation outer function has returned
-var myLocation = setLocation("Seattle");
 
+var myNewLocation = setNewLocation("Seattle");
 
-​// The closure (printLocation) is called here after the outer function has returned above​
-​// Yet, the closure still has access to the outer function's variables and parameter​
-myLocation(); // "You are in Seattle, Washington"
+// The closure (printLocation) is called here after the outer function has returned above​
+// Yet, the closure still has access to the outer function's variables and parameter​
+
+myNewLocation(); // "You are in Seattle, Washington"
 ```
 
 You see, `printLocation()` is *returned* inside the outer `setLocation()` function instead of being immediately called. The value of `currentLocation` is in the inner `printLocation()` function.
