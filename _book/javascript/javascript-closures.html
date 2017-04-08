@@ -1,0 +1,514 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Closures · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="javascript-callbacks.html" />
+    
+    
+    <link rel="prev" href="javascript-scope-and-hoisting.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Javascript
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="javascript-objects.html">
+            
+                <a href="javascript-objects.html">
+            
+                    
+                    Objects
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="javascript-prototypes.html">
+            
+                <a href="javascript-prototypes.html">
+            
+                    
+                    Prototypes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="javascript-scope-and-hoisting.html">
+            
+                <a href="javascript-scope-and-hoisting.html">
+            
+                    
+                    Scope and Hoisting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.4" data-path="javascript-closures.html">
+            
+                <a href="javascript-closures.html">
+            
+                    
+                    Closures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="javascript-callbacks.html">
+            
+                <a href="javascript-callbacks.html">
+            
+                    
+                    Callbacks
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../aws/">
+            
+                <a href="../aws/">
+            
+                    
+                    Amazon Web Services
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Closures</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="time-for-some-closures">Time for some Closures</h1>
+<h2 id="what-is-a-closure">What is a closure?</h2>
+<p>Put simply as closure is a function that exists within another function and has access to the encapsulating function&apos;s variables. Make sure you understand the idea of scoping beforehand!</p>
+<p>Closures are any function that keeps reference to variables from its parent&#x2019;s scope <em>even after the parent has returned</em>.</p>
+<p>Closures have three scope chain:</p>
+<ol>
+<li>It&apos;s own scope. (variables defined within its own curly brackets)</li>
+<li>The outer function&apos;s scope (variables within the function surrounding it)</li>
+<li>The global scope (variables available to the whole application)</li>
+</ol>
+<p>It&apos;s easier to see than explain sometimes:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> hey = <span class="hljs-string">&quot;Hey &quot;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayFullGreeting</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> weather = <span class="hljs-string">&quot;pretty nice out!&quot;</span>;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">alice</span>(<span class="hljs-params"></span>) </span>{
+        name = <span class="hljs-string">&quot;Alice &quot;</span>;
+        <span class="hljs-keyword">return</span> hey + name + <span class="hljs-string">&quot;sure is &quot;</span> + weather;
+    }
+    <span class="hljs-keyword">return</span> alice();
+}
+
+<span class="hljs-built_in">console</span>.log(sayFullGreeting()); <span class="hljs-comment">// &quot;Hey Alice sure is pretty nice out!</span>
+</code></pre>
+<p>Closures are used extensively in Node.js; they are workhorses in Node.js&#x2019; asynchronous, non-blocking architecture. Closures are also frequently used in jQuery and just about every piece of JavaScript code you read.</p>
+<p>Here&apos;s a jQuery closure:</p>
+<pre><code class="lang-javascript">$(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> selections = [];
+
+    <span class="hljs-comment">// The closure below has access to the &apos;selections&apos; array</span>
+    $(<span class="hljs-string">&quot;.button-class&quot;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-comment">// on button click, push the button-name property to the selections array</span>
+        selections.push(<span class="hljs-keyword">this</span>.prop(<span class="hljs-string">&quot;button-name&quot;</span>));
+    });
+});
+</code></pre>
+<h2 id="closure-rules">Closure rules</h2>
+<h3 id="closures-can-refer-to-variables-outside-the-current-function">Closures can refer to variables outside the current function</h3>
+<p>In the example below, <code>printLocation()</code> refers to the <code>state</code> variable and the <code>city</code> parameter of the enclosing/parent <code>setLocation()</code> function. As a result, when <code>setLocation()</code> is called, <code>printLocation()</code> uses the variables and parameters of its parent to print &quot;You are in Seattle, Washington&quot;.</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLocation</span>(<span class="hljs-params">city</span>) </span>{
+    <span class="hljs-keyword">var</span> state = <span class="hljs-string">&quot;Washington&quot;</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printLocation</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;You are in &quot;</span> + city + <span class="hljs-string">&quot;, &quot;</span> + state;
+    }
+
+    <span class="hljs-keyword">return</span> printLocation();
+}
+
+<span class="hljs-built_in">console</span>.log(setLocation(<span class="hljs-string">&quot;Seattle&quot;</span>)); <span class="hljs-comment">// &quot;You are in Seattle, Washington&quot;</span>
+</code></pre>
+<h3 id="closures-have-access-to-the-outer-functions-variableeven-afterthe-outer-function-returns">Closures have access to the outer function&apos;s variable<em>even after</em>the outer function returns</h3>
+<p>The inner function still has access to the outer function&#x2019;s variables even after the outer function has returned. </p>
+<p>Yep, you read that correctly. </p>
+<p>When functions in JavaScript execute, they use the same scope chain that was in effect when they were created. This means that even after the outer function has returned, the inner function still has access to the outer function&#x2019;s variables. </p>
+<p>Therefore, you can call the inner function later in your program. </p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setNewLocation</span>(<span class="hljs-params">city</span>)</span>{
+    <span class="hljs-keyword">var</span> state = <span class="hljs-string">&quot;Washington&quot;</span>
+
+     <span class="hljs-comment">// this inner function has access to the outer function&apos;s variables, including the parameter&#x200B;</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printLocation</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;You are in &quot;</span> + city + <span class="hljs-string">&quot;, &quot;</span> + state;
+    }
+
+    <span class="hljs-keyword">return</span> printLocation;
+};
+
+<span class="hljs-comment">// At this juncture, the setLocation outer function has returned</span>
+
+<span class="hljs-keyword">var</span> myNewLocation = setNewLocation(<span class="hljs-string">&quot;Seattle&quot;</span>);
+
+<span class="hljs-comment">// The closure (printLocation) is called here after the outer function has returned above&#x200B;</span>
+<span class="hljs-comment">// Yet, the closure still has access to the outer function&apos;s variables and parameter&#x200B;</span>
+
+myNewLocation(); <span class="hljs-comment">// &quot;You are in Seattle, Washington&quot;</span>
+</code></pre>
+<p>You see, <code>printLocation()</code> is <em>returned</em> inside the outer <code>setLocation()</code> function instead of being immediately called. The value of <code>currentLocation</code> is in the inner <code>printLocation()</code> function.</p>
+<p>The inner <code>printLocation()</code> gets executed outside of its lexical scope and still &quot;remembers&quot; its variable (<code>state</code>) and parameter (<code>city</code>) even though <code>setLocation()</code> has completed.</p>
+<p>Closures remember their surrounding scope (the outer function) even when it&apos;s executed outside its lexical scope! You can call it at any time later in your program!</p>
+<h3 id="closures-storereferencesto-the-outer-functions-variables">Closures store<em>references</em>to the outer function&apos;s variables</h3>
+<p>Not the actual value, but the reference! If the outer function&apos;s variable changes before the closure is called, things start to get really interesting</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cityLocation</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> city = <span class="hljs-string">&quot;Seattle&quot;</span>;
+
+    <span class="hljs-comment">// Returning an object with inner functions</span>
+    <span class="hljs-comment">// The inner functions are closures and have access to the outer vars</span>
+    <span class="hljs-keyword">return</span> {
+        getCity: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-comment">// This will return whatever the current value of city is.</span>
+            <span class="hljs-keyword">return</span> city;
+        },
+        setCity: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">newCity</span>) </span>{
+            <span class="hljs-comment">// This can change the outer variable</span>
+            city = newCity;
+        }
+    }
+}
+
+<span class="hljs-keyword">var</span> zoeCity = cityLocation(); <span class="hljs-comment">// myId() is called</span>
+
+zoeCity.getCity(); <span class="hljs-comment">// &quot;Seattle&quot;</span>
+zoeCity.setCity(<span class="hljs-string">&quot;Bainbridge&quot;</span>);
+zoeCity.getCity(); <span class="hljs-comment">// &quot;Bainbridge&quot;</span>
+</code></pre>
+<p>Closures can both read and update their stored variables. The updates made are also visible to the closures, as seen in the <code>getCity()</code> method.</p>
+<p>One more time: closures store <em>references</em> to varibles, <em>not values</em>!</p>
+<h2 id="closures-gone-wild">Closures gone wild</h2>
+<p>Because closures have access to the update values of the outer function&apos;s variables, strange things can happen when you use <code>for</code> loops in the outer function.</p>
+<p>Check this out:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">celebrityIDCreator</span>(<span class="hljs-params">theCelebrities</span>) </span>{
+    <span class="hljs-keyword">var</span> i;
+    <span class="hljs-keyword">var</span> uniqueID = <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; theCelebrities.length; i++) {
+      theCelebrities[i][<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>)  </span>{
+        <span class="hljs-keyword">return</span> uniqueID + i;
+      }
+    }
+
+    <span class="hljs-keyword">return</span> theCelebrities;
+};
+<span class="hljs-keyword">var</span> actionCelebs = [
+    {name:<span class="hljs-string">&quot;Stallone&quot;</span>, id:<span class="hljs-number">0</span>}, 
+    {name:<span class="hljs-string">&quot;Cruise&quot;</span>, id:<span class="hljs-number">0</span>}, 
+    {name:<span class="hljs-string">&quot;Willis&quot;</span>, id:<span class="hljs-number">0</span>}
+];
+<span class="hljs-keyword">var</span> createIdForActionCelebs = celebrityIDCreator(actionCelebs);
+<span class="hljs-keyword">var</span> stalloneID = createIdForActionCelebs [<span class="hljs-number">0</span>];
+<span class="hljs-built_in">console</span>.log(stalloneID.id());
+</code></pre>
+<p>In the preceding example, by the time the anonymous functions are called, the value of <code>i</code> is 3 (the length of the array and then it increments). The number 3 was added to the <code>uniqueID</code> to create 103 for ALL the <code>celebritiesID</code>. So every position in the returned array get <code>id = 103</code>, instead of the intended 100, 101, 102.</p>
+<p>The reason this happened was because, as we have discussed in the previous example, the closure (the anonymous function in this example) has access to the outer function&#x2019;s variables by reference, not by value. So just as the previous example showed that we can access the updated variable with the closure, this example similarly accessed the <code>i</code> variable when it was changed, since the outer function runs the entire <code>for</code> loop and returns the last value of <code>i</code>, which is 103.</p>
+<p>To fix this side effect (bug) in closures, you can use an <strong>Immediately Invoked Function Expression (IIFE)</strong>, such as the following:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">celebrityIDCreator</span> (<span class="hljs-params">theCelebrities</span>) </span>{
+    <span class="hljs-keyword">var</span> i;
+    <span class="hljs-keyword">var</span> uniqueID = <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; theCelebrities.length; i++) {
+        <span class="hljs-comment">// the j parametric variable is the i passed in on invocation of this IIFE</span>
+        theCelebrities[i][<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">j</span>)  </span>{ 
+            <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+
+                <span class="hljs-comment">// each iteration of the for loop passes the current value of i</span>
+                <span class="hljs-comment">// into this IIFE and it saves the correct value to the array</span>
+
+                <span class="hljs-keyword">return</span> uniqueID + j;
+            <span class="hljs-comment">// BY adding () at the end of this function, we are executing it</span>
+            <span class="hljs-comment">// immediately and returning just the value of uniqueID + j,</span>
+            <span class="hljs-comment">// instead of returning a function.</span>
+            } ()
+
+        <span class="hljs-comment">// immediately invoke the function passing the i variable as a parameter</span>
+        } (i);
+    }
+
+    <span class="hljs-keyword">return</span> theCelebrities;
+};
+
+<span class="hljs-keyword">var</span> actionCelebs = [{name:<span class="hljs-string">&quot;Stallone&quot;</span>, id:<span class="hljs-number">0</span>}, {name:<span class="hljs-string">&quot;Cruise&quot;</span>, id:<span class="hljs-number">0</span>}, {name:<span class="hljs-string">&quot;Willis&quot;</span>, id:<span class="hljs-number">0</span>}];
+
+<span class="hljs-keyword">var</span> createIdForActionCelebs = celebrityIDCreator (actionCelebs);
+
+<span class="hljs-keyword">var</span> stalloneID = createIdForActionCelebs [<span class="hljs-number">0</span>];
+<span class="hljs-built_in">console</span>.log(stalloneID.id); <span class="hljs-comment">// 100</span>
+
+<span class="hljs-keyword">var</span> cruiseID = createIdForActionCelebs [<span class="hljs-number">1</span>];
+<span class="hljs-built_in">console</span>.log(cruiseID.id); <span class="hljs-comment">// 101</span>
+</code></pre>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="http://javascriptissexy.com/understand-javascript-closures-with-ease/" target="_blank">Understranding Javascript Closures with Ease - Javascript is Sexy</a></li>
+<li><a href="https://www.w3schools.com/js/js_function_closures.asp" target="_blank">Javascript Closures - W3Schools</a></li>
+<li><a href="https://www.sitepoint.com/demystifying-javascript-closures-callbacks-iifes/" target="_blank">Demystifying Closures, Callbacks, and IIFEs - Sitepoint</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="javascript-scope-and-hoisting.html" class="navigation navigation-prev " aria-label="Previous page: Scope and Hoisting">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="javascript-callbacks.html" class="navigation navigation-next " aria-label="Next page: Callbacks">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Closures","level":"1.2.4","depth":2,"next":{"title":"Callbacks","level":"1.2.5","depth":2,"path":"javascript/javascript-callbacks.md","ref":"javascript/javascript-callbacks.md","articles":[]},"previous":{"title":"Scope and Hoisting","level":"1.2.3","depth":2,"path":"javascript/javascript-scope-and-hoisting.md","ref":"javascript/javascript-scope-and-hoisting.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","codeblock-disable-glossary","livereload"],"pluginsConfig":{"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"codeblock-disable-glossary":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"readme.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javascript/javascript-closures.md","mtime":"2017-04-08T21:54:40.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-08T21:54:43.150Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-codeblock-disable-glossary/disable-glossary.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,495 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Scope and Hoisting · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="javascript-closures.html" />
+    
+    
+    <link rel="prev" href="javascript-prototypes.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Javascript
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="javascript-objects.html">
+            
+                <a href="javascript-objects.html">
+            
+                    
+                    Objects
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="javascript-prototypes.html">
+            
+                <a href="javascript-prototypes.html">
+            
+                    
+                    Prototypes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.3" data-path="javascript-scope-and-hoisting.html">
+            
+                <a href="javascript-scope-and-hoisting.html">
+            
+                    
+                    Scope and Hoisting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="javascript-closures.html">
+            
+                <a href="javascript-closures.html">
+            
+                    
+                    Closures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="javascript-callbacks.html">
+            
+                <a href="javascript-callbacks.html">
+            
+                    
+                    Callbacks
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../aws/">
+            
+                <a href="../aws/">
+            
+                    
+                    Amazon Web Services
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Scope and Hoisting</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="scope-and-hoisting-not-just-for-pirates">Scope and Hoisting: Not just for pirates</h1>
+<h2 id="what-is-a-variable-scope">What is a variable scope?</h2>
+<p>Simply put, the variable&apos;s scope is the context in which it exists. It just specifies whether or not you can access that variable. You can use it in the same way that you might use <code>private</code> or <code>public</code> in other languages like Java!</p>
+<p>We have two levels of scope: <strong>local</strong> and <strong>global</strong>.</p>
+<h2 id="local-scope-aka-function-level-scope">Local scope, a.k.a function-level scope</h2>
+<p>Let&apos;s look at the following code snippet. We had two variables both named <code>variable</code>, but the one wrapped in the function that said <code>&quot;I&apos;m local!&quot;</code> was only accessible by that function or by functions within that function.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> variable = <span class="hljs-string">&quot;I&apos;m global!&quot;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showLocalVariable</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> variable = <span class="hljs-string">&quot;I&apos;m local!&quot;</span>;
+    <span class="hljs-keyword">return</span> variable;
+}
+
+<span class="hljs-built_in">console</span>.log(variable); <span class="hljs-comment">// &quot;I&apos;m global!&quot;</span>
+<span class="hljs-built_in">console</span>.log(showLocalVariable()); <span class="hljs-comment">// &quot;I&apos;m local!&quot;</span>
+</code></pre>
+<h3 id="always-declare-local-variables">Always declare local variables</h3>
+<p>Make sure you <strong>always declare your local variables</strong>. If you do not want them to change the global variable, make sure you have a <code>var</code> in front of them when initializing or otherwise. Or else they will bleed through and pollute the global scope. Here&apos;s an example:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;Gandalf&quot;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showWizardName</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> name;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showRegularName</span>(<span class="hljs-params"></span>) </span>{
+    name = <span class="hljs-string">&quot;Steve&quot;</span>;
+    <span class="hljs-keyword">return</span> name;
+}
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Presenting the great wizard&quot;</span>, showWizardName()); <span class="hljs-comment">// name = Gandalf</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Presenting the normal dude&quot;</span>, showRegularName()); <span class="hljs-comment">// uh oh, name = Steve now</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Once again, by popular demand, the great wizard&quot;</span>, showWizardName()); <span class="hljs-comment">// name = Steve</span>
+</code></pre>
+<h3 id="local-variables-win-over-global-variables">Local variables win over global variables</h3>
+<p>Another thing to keep in mind with local and global variables is that if you declare one local variable and one global variable both with the same names, <strong>the local/function-level variable will take precidence over the global variable in a function</strong>. In the code example below, <code>showN()</code> will return <code>2</code>, not <code>1</code>, because the <code>n</code> variable declared inside the function takes priority over the global version of <code>n</code></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> n = <span class="hljs-number">1</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showN</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">var</span> n = <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">return</span> n;
+}
+
+<span class="hljs-built_in">console</span>.log(showN()); <span class="hljs-comment">// 2</span>
+</code></pre>
+<h2 id="global-scope">Global scope</h2>
+<p>A global-scope variable is <strong>any variable declared outside a function</strong>. In the browser, the global scope/context is the HTML document or window object.</p>
+<p>Anything declared outside of a function is available to the whole application to access, modify, and use. Watch out for this as you build larger applications -- having lots of variable names floating around can be dangerous and bad for organization.</p>
+<p>If a variable is initialized without being declared with a <code>var</code>, it is automatically added to the global context and this becomes a global variable:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showNum</span>(<span class="hljs-params"></span>)</span>{
+    num = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> num;
+}
+
+<span class="hljs-built_in">console</span>.log(showNum()); <span class="hljs-comment">// 1, like we expected</span>
+<span class="hljs-built_in">console</span>.log(num); <span class="hljs-comment">// also gives us 1. Because we didn&apos;t iniitialze num, it&apos;s now global.</span>
+</code></pre>
+<p>Here is another example of a variable that seems like it should be local, but is actually global:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">5</span>; i++) {
+    <span class="hljs-built_in">console</span>.log (i); <span class="hljs-comment">// outputs 1, 2, 3, 4, 5</span>
+};
+
+<span class="hljs-comment">// The variable i is a global variable and it is accessible in the</span>
+<span class="hljs-comment">// following function with the last value it was assigned above &#x200B;</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">aNumber</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(i);
+}
+
+<span class="hljs-comment">// The variable i in the aNumber function below is the global variable</span>
+<span class="hljs-comment">// i that was changed in the for loop above. Its last value was 6, set</span>
+<span class="hljs-comment">// just before the for loop exited:</span>
+aNumber ();  <span class="hljs-comment">// 6</span>
+</code></pre>
+<h3 id="settimeout-variables-are-executed-in-the-global-scope">setTimeout Variables are Executed in the Global Scope</h3>
+<p>Now we&apos;re getting into the idea of <code>this</code> in Javascript. Check out what the <code>setTimeout</code> function looks like in this example below:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi!&quot;</span>;
+<span class="hljs-keyword">var</span> myGreetObj = {
+    greeting:   <span class="hljs-string">&quot;Hello!&quot;</span>,
+    sayHi:      <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ 
+                    setTimeout(
+                        <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ 
+                            <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.greeting); 
+                        }, 
+                        <span class="hljs-number">2000</span>); 
+                }
+} 
+
+myGreetObj.sayHi(); <span class="hljs-comment">// &quot;Hi!&quot;, not &quot;Hello!&quot;</span>
+</code></pre>
+<p>Why does <code>myGreetObj.sayHi()</code> use <code>&quot;Hi!&quot;</code> for <code>greeting</code> not <code>&quot;Hello!&quot;</code> as defined in <code>myGreetObj</code>? Because <code>this</code> when used in <code>setTimeout</code> always refers to the global scope Window object, not <code>myGreetObj</code> as we would expect. Javascript is wacky sometimes!</p>
+<h3 id="do-not-pollute-the-global-scope">Do not Pollute the Global Scope</h3>
+<p>Pollution is bad. And as mentioned above when building a large Javascript application, the last thing you want to do is wade through lots of variable names. Encapsulate them within the functions that use them and you will be much happier!</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// THE BAD DEV WAY:</span>
+<span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;Steve&quot;</span>, age = <span class="hljs-string">&quot;25&quot;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getName1</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">return</span> name, <span class="hljs-string">&quot;is&quot;</span>, age;
+}
+
+<span class="hljs-comment">// THE GOOD WAY</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getName2</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;Steve&quot;</span>, age = <span class="hljs-string">&quot;25&quot;</span>;
+    <span class="hljs-keyword">return</span> name, <span class="hljs-string">&quot;is&quot;</span>, age;
+}
+</code></pre>
+<h2 id="hoisting-variables">Hoisting variables</h2>
+<p>In Javascript, any variable declaration is hoisted to the top of the scope before any initialization or execution happens. This is weird to understand, but if you have <code>var x = 1;</code>, the JS runtime will grab just <code>var x</code>, hoist it straight to the top of the scope, and temporarily initialize it as <code>undefined</code> even though you technically initialized it with a number</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// this will log out undefined!</span>
+<span class="hljs-comment">// Why?</span>
+<span class="hljs-comment">// Because in the execution process, var name is hoisted to the top of the function scope</span>
+<span class="hljs-comment">// var name temporarily is initialized as undefined</span>
+<span class="hljs-comment">// Next, JS hits the console.log line and exectutes it as &quot;firstName:&quot; + name -- which is currently undefined</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showName</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;firstName:&quot;</span>, name);
+    <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;LazerThunder&quot;</span>;
+}
+
+<span class="hljs-comment">// Another example</span>
+<span class="hljs-comment">// 1. First JS looks for anything with var and hoists it up, initialzing it temporarily as undefined. </span>
+<span class="hljs-comment">// 2. Next, it works its way down the line:</span>
+<span class="hljs-comment">// 3. console.log(&quot;firstName:&quot;, name);</span>
+<span class="hljs-comment">//      =&gt; &quot;undefined&quot;, because as far as we know, that&apos;s what name is</span>
+<span class="hljs-comment">// 4. var name = &quot;KillaShottz&quot;;        </span>
+<span class="hljs-comment">//      =&gt; Oh hey! Now we have some initialization! name isn&apos;t undefined, it&apos;s &quot;KillaShottz&quot;</span>
+<span class="hljs-comment">// 5. console.log(&quot;lastName:&quot;, name);</span>
+<span class="hljs-comment">//      =&gt; I know what name is -- it&apos;s &quot;KillaShottz&quot;! Log it out!</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showNameAgain</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;firstName:&quot;</span>, name);
+    <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;KillaShottz&quot;</span>; <span class="hljs-comment">// JS looks for the &quot;var&quot; declaration first and takes this to the top</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;lastName:&quot;</span>, name);
+}
+</code></pre>
+<h3 id="function-declaration-overrides-variable-declaration-in-hoisting">Function declaration overrides variable declaration in hoisting</h3>
+<p>Both function and variable declarations get hoisted, but function declarations take precidence! But, like variables, the assignment of functions has to wait for the code to execute down the line.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> beans;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">beans</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Great Northern&quot;</span>;
+}
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> beans); <span class="hljs-comment">// function, because functions are more important to JS</span>
+</code></pre>
+<p>Watch out though, because in this situation, the variable has an assignment and will override the function.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> moreBeans = <span class="hljs-string">&quot;Pinto&quot;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">moreBeans</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Kidney&quot;</span>;
+}
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> moreBeans); <span class="hljs-comment">// string</span>
+</code></pre>
+<p>Note also that a function expression (<code>var beans = function() { return &quot;Great Northern&quot;; }</code>) will not be hoisted.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="http://javascriptissexy.com/javascript-variable-scope-and-hoisting-explained/" target="_blank">Variable Scope and Hoisting Explained - Javascript is Sexy</a></li>
+<li><a href="https://scotch.io/tutorials/understanding-hoisting-in-javascript" target="_blank">Understanding Hoisting in Javascript - Scotch.io</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="javascript-prototypes.html" class="navigation navigation-prev " aria-label="Previous page: Prototypes">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="javascript-closures.html" class="navigation navigation-next " aria-label="Next page: Closures">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Scope and Hoisting","level":"1.2.3","depth":2,"next":{"title":"Closures","level":"1.2.4","depth":2,"path":"javascript/javascript-closures.md","ref":"javascript/javascript-closures.md","articles":[]},"previous":{"title":"Prototypes","level":"1.2.2","depth":2,"path":"javascript/javascript-prototypes.md","ref":"javascript/javascript-prototypes.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","codeblock-disable-glossary","livereload"],"pluginsConfig":{"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"codeblock-disable-glossary":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"readme.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javascript/javascript-scope-and-hoisting.md","mtime":"2017-04-08T20:24:46.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-08T21:54:43.150Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-codeblock-disable-glossary/disable-glossary.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

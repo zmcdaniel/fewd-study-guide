@@ -174,12 +174,12 @@ function celebrityIDCreator (theCelebrities) {
     var i;
     var uniqueID = 100;
     for (i = 0; i < theCelebrities.length; i++) {
-        // the j parametric variable is the i passed in on invocation of this IIFE​
+        // the j parametric variable is the i passed in on invocation of this IIFE
         theCelebrities[i]["id"] = function (j)  { 
             return function () {
                 
                 // each iteration of the for loop passes the current value of i
-                // into this IIFE and it saves the correct value to the array​
+                // into this IIFE and it saves the correct value to the array
             
                 return uniqueID + j;
             // BY adding () at the end of this function, we are executing it
@@ -199,9 +199,9 @@ var actionCelebs = [{name:"Stallone", id:0}, {name:"Cruise", id:0}, {name:"Willi
 var createIdForActionCelebs = celebrityIDCreator (actionCelebs);
 
 var stalloneID = createIdForActionCelebs [0];
-console.log(stalloneID.id); // 100​
+console.log(stalloneID.id); // 100
 
-var cruiseID = createIdForActionCelebs [1]; 
+var cruiseID = createIdForActionCelebs [1];
 console.log(cruiseID.id); // 101
 ```
 

@@ -1,0 +1,535 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Prototypes · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="javascript-scope-and-hoisting.html" />
+    
+    
+    <link rel="prev" href="javascript-objects.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Javascript
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="javascript-objects.html">
+            
+                <a href="javascript-objects.html">
+            
+                    
+                    Objects
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="javascript-prototypes.html">
+            
+                <a href="javascript-prototypes.html">
+            
+                    
+                    Prototypes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="javascript-scope-and-hoisting.html">
+            
+                <a href="javascript-scope-and-hoisting.html">
+            
+                    
+                    Scope and Hoisting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="javascript-closures.html">
+            
+                <a href="javascript-closures.html">
+            
+                    
+                    Closures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="javascript-callbacks.html">
+            
+                <a href="javascript-callbacks.html">
+            
+                    
+                    Callbacks
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../aws/">
+            
+                <a href="../aws/">
+            
+                    
+                    Amazon Web Services
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Prototypes</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="javascript-prototypes-in-plain-english">Javascript prototypes in plain English</h1>
+<p>In most languages you use inheritance by having one class inherit another parent class to automatically have access to all of the parents&apos; methods and variables. At least until ES6, Javascript didn&apos;t really have a <strong>class</strong> but instead used <strong>prototypes</strong>. </p>
+<p>In a nutshell, <strong>prototypal inheritance</strong> looks like this:</p>
+<ol>
+<li>An object has a number of properties, including properties/attributes (like <code>this.name = name</code> or <code>name: Fred</code>) and methods/functions.</li>
+<li><p>An object has a special parent property, also called the <strong>prototype attribute</strong> or <strong>prototype object</strong>, also in certain browsers <code>__proto__</code> as a shorthand. This points to the object&#x2019;s &#x201C;parent&#x201D;&#x2014;the object it inherited its properties from. For example:</p>
+<pre><code class="lang-javascript"> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>{};
+
+ Dog.prototype.bark = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.canBark == <span class="hljs-literal">true</span>) {
+     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Woof!&quot;</span>);
+   } <span class="hljs-keyword">else</span> {
+     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;...&quot;</span>);
+   }
+ }
+
+ <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Labrador</span>(<span class="hljs-params"></span>) </span>{
+   <span class="hljs-keyword">this</span>.canBark = <span class="hljs-literal">true</span>;
+ };
+
+ <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Basenji</span>(<span class="hljs-params"></span>) </span>{
+   <span class="hljs-keyword">this</span>.canBark = <span class="hljs-literal">false</span>;
+ };
+
+ <span class="hljs-comment">// The prototype for a Labrador is now Dog, so we have access to the bark function</span>
+ Labrador.prototype = <span class="hljs-keyword">new</span> Dog();
+ Basenji.prototype = <span class="hljs-keyword">new</span> Dog();
+
+ <span class="hljs-keyword">var</span> bear = <span class="hljs-keyword">new</span> Labrador();
+ <span class="hljs-keyword">var</span> wiley = <span class="hljs-keyword">new</span> Basenji();
+
+ <span class="hljs-comment">// our Labrador instance will bark!</span>
+ bear.bark();
+ <span class="hljs-comment">// ...but our Basenji is silent!</span>
+ wiley.bark();
+
+ <span class="hljs-built_in">console</span>.log(bear.__proto__ == Labrador); <span class="hljs-comment">// true</span>
+</code></pre>
+<ol>
+<li>An object can also override a property of its parent by setting the property on itself:<pre><code class="lang-javascript"><span class="hljs-comment">// Let&apos;s say Wiley is a special Basenji who can actually bark!</span>
+wiley.canBark = <span class="hljs-literal">true</span>;
+wiley.bark(); <span class="hljs-comment">// &quot;Woof!&quot;</span>
+</code></pre>
+</li>
+</ol>
+</li>
+<li><p>A <strong>constructor</strong> creates/instantiates objects. Each constructor has an associated <strong>prototype object</strong> or, in code, <code>Object.prototype</code>. Use the <code>new</code> keyword to call a constructor</p>
+<pre><code class="lang-javascript"> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Pony</span>(<span class="hljs-params"></span>)</span>{};
+
+ <span class="hljs-comment">// This is using the Pony constructor to create my faithful mount, Kelly</span>
+ <span class="hljs-keyword">var</span> kelly = <span class="hljs-keyword">new</span> Pony();
+
+ <span class="hljs-comment">//This returns the Pony constructor function on line 1 (Pony())</span>
+ <span class="hljs-built_in">console</span>.log(kelly.constructor);
+
+ <span class="hljs-comment">//This goes a little deeper -- the constructor for Pony in the constructor for Function objects</span>
+ <span class="hljs-built_in">console</span>.log(Pony.constructor);
+
+ <span class="hljs-comment">// This lets use know that the Prototype of Pony is the Object prototype</span>
+ <span class="hljs-built_in">console</span>.log(Pony.prototype);
+
+ <span class="hljs-comment">// Is Kelly&apos;s prototype a child of the Pony prototype? Yes! True!</span>
+ <span class="hljs-built_in">console</span>.log(kelly.__proto__ == Pony.prototype);
+</code></pre>
+</li>
+<li>When an object is instantiated, the parent is set to the prototype object associated with the constructor that created it.</li>
+</ol>
+<h3 id="prototype-property-and-prototype-attribute">Prototype Property and Prototype Attribute</h3>
+<h4 id="prototype-property-determines-what-is-inherited">Prototype property determines what is inherited</h4>
+<p>Every Javascript function has a <strong>prototype property</strong>, which is empty by default. Whenever you want to make it so a method or property can be inherited, you attach them to the prototype property. It&apos;s important to note the the prototype property is NOT enumerable, and so will not be accessable for a <code>for</code>/<code>in</code> loop.</p>
+<ul>
+<li><code>prototype</code> is a property of a Function object -- the prototype of objects constructed by that function. It should&apos;ve really been called something like, <code>prototypeToInstall</code>, since that&apos;s what it is. You use it to add new properties to an existing prototype.</li>
+</ul>
+<p>Prototype property is used mostly for inheritance -- anything you want to pass down to children. Take this for an example:</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Let&apos;s make a Person prototype a sayHi method to the prototype property</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>)</span>{};
+Person.prototype.sayHi = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Hello &apos;</span> + <span class="hljs-keyword">this</span>.name);
+}
+
+<span class="hljs-comment">// Now let&apos;s make a Guy prototype that inherits from Person&apos;s prototype but also has its own Name property</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Guy</span>(<span class="hljs-params">name</span>)</span>{ <span class="hljs-keyword">this</span>.name = name};
+Guy.prototype = <span class="hljs-keyword">new</span> Person();
+
+<span class="hljs-comment">// Instantiating a Guy object named &apos;michael&apos;, using the Guy constructor</span>
+<span class="hljs-keyword">var</span> michael = <span class="hljs-keyword">new</span> Guy(<span class="hljs-string">&quot;Michael&quot;</span>);
+
+<span class="hljs-comment">// michael inherited all the properties and methods, including sayHi. Now michael can call sayHi directly, even though we never created a sayHi method on him</span>
+michael.sayHi();
+</code></pre>
+<p>Cool! The way  that this prototype chain works looks like this:</p>
+<p><code>michael</code> &lt; <code>Guy.prototype</code> &lt; <code>Person.prototype</code> &lt; <code>Object.prototype</code></p>
+<p>You can add properties to any of <code>michael</code>&apos;s parents and <code>michael</code> will automatically gain those properties too, even <em>after</em> <code>michael</code> has already been created!</p>
+<p>Also, note that this will be <code>true</code> for reasons mentioned above: <code>michael.__proto__ == Guy.prototype</code></p>
+<h4 id="prototype-attribute-tells-us-who-the-objects-parent-is">Prototype attribute tells us who the object&apos;s parent is</h4>
+<p>The attribute is a characteristic of an object that points to who their parent is. This is also often called the <strong>prototype object</strong>. It&apos;s automatically set as a part of any new object you instantiate on creation. The <code>__proto__</code> pseudo property contains the object&apos;s prototype object aka the prototype attribute -- the parent object it inherited its method and properties from. </p>
+<p>To get a peek and access prototype properties in most modern browsers, use <code>__proto__</code>. When console.log-ed, you can look at any object&apos;s inherited properties and methods.</p>
+<ul>
+<li><code>__proto__</code> is an internal property of an object and <em>points</em> to the parent prototype. It&apos;s that &quot;installed prototype&quot; on an object (that was created/installed upon the object from said <code>constructor()</code> function). </li>
+</ul>
+<h5 id="prototype-attribute-of-objects-created-via-object-literal-or-new-object">Prototype attribute of objects created via Object Literal or &apos;new Object()&apos;</h5>
+<p>Anything made with an object literal or the native Object constructor inherit from <code>Object.prototype</code>, so <code>Object.prototype</code> is the prototype attribute/prototype object. Note that <code>Object.protoype</code> inherits from no one -- it is the top of the hierarchy.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> objectLiteral = {type: <span class="hljs-string">&apos;Object Literal&apos;</span>};;
+<span class="hljs-keyword">var</span> newObject = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
+
+<span class="hljs-built_in">console</span>.log(objectLiteral.__proto__); <span class="hljs-comment">// Object {...}</span>
+<span class="hljs-built_in">console</span>.log(newObject.__proto__); <span class="hljs-comment">// Object {...}</span>
+</code></pre>
+<h5 id="prototype-attribute-of-objects-created-with-constructor-functions">Prototype attribute of objects created with constructor functions</h5>
+<p>If you are making your objects using the <code>new</code> keyword or constructor other than the <code>Object()</code> constructor (<code>var blah = new Object()</code>), the prototype attribute will come from the constructor function. </p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">User</span>(<span class="hljs-params"></span>)</span>{};
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Admin</span>(<span class="hljs-params"></span>)</span>{};
+
+Admin.prototype = <span class="hljs-keyword">new</span> User();
+
+<span class="hljs-keyword">var</span> steveJobs = <span class="hljs-keyword">new</span> Admin();
+<span class="hljs-keyword">var</span> unassignedTestAccount = <span class="hljs-keyword">new</span> User();
+
+<span class="hljs-built_in">console</span>.log(steveJobs.__proto__); <span class="hljs-comment">// User {}</span>
+<span class="hljs-built_in">console</span>.log(unassignedTestAccount.__proto__); <span class="hljs-comment">// Object {constructor: function}</span>
+</code></pre>
+<p>Essentially, we are looking one up on the hierarchy to see who the prototype parent is. Steve Jobs is an Admin -- where does Admin inherit from? unassignedTestAccount is a User -- where does User inherit from?</p>
+<h5 id="in-a-nutshell">In a nutshell...</h5>
+<ol>
+<li>If an object is created with an object literal (<code>var obj = {};</code>) or uses the Object constructor (<code>var obj = new Object();</code>), the prototype attribute / prototype object is <code>Object.prototype</code> and it inherits all properties and methods from it.</li>
+<li>If an object is created with a different constructor, like <code>new Dog()</code>, <code>new Pony()</code>, or <code>new Guy()</code>, it inherits from <code>Dog.prototype</code>, <code>Pony.prototype</code>, or <code>Guy.prototype</code> -- namely the constructor for all of the above. </li>
+</ol>
+<h3 id="summary-of-prototypes-and-their-importance-to-javascript">Summary of prototypes and their importance to Javascript</h3>
+<p>There are two important ways the prototype is used in Javascript. Let&apos;s go over them one more time, just to drive it home.</p>
+<ol>
+<li><p><strong>Prototype property</strong>: great for inheritance!</p>
+<ul>
+<li>Since Javascript does not have <em>classical inheritance</em> like most object oriented languages, inheritance is made possible through the prototype property.</li>
+<li><p>What is inheritance exactly?</p>
+<ul>
+<li>A programming paradigm where objects (or Classes in some languages) can inherit properties and methods from other objects (or Classes).</li>
+<li>For example, you can create a <code>Reptile</code> function (which is an object, because all functions in JS are objects) and add properties and methods that will apply to all instances created from the <code>Reptile</code> prototype.
+```javascript
+// Let&apos;s create a Reptile &apos;class&apos; with properties that most Reptiles have
+function Reptile(){
+this.reproduction = &apos;eggs&apos;;
+this.blood = &apos;cold-blooded&apos;;
+};</li>
+</ul>
+<p>// Adding a method to the Reptile prototype to show the characteristics in the console
+Reptile.prototype.showCharacteristics = function() {
+ console.log(&quot;I am a &quot; + this.name + &quot;. I am &quot; + this.blood);
+ if (this.reproduction == &apos;eggs&apos;) {</p>
+<pre><code> console.log(&quot;I reproduce by laying &quot; + this.reproduction);
+</code></pre><p>  } else {</p>
+<pre><code> // Some reptiles have alternative ways besides eggs! Just in case, let&apos;s add this conditional
+ console.log(&quot;I actually reproduce via &quot; + this.reproduction); 
+</code></pre><p>  }
+};</p>
+<p>// Now we are creating a constructor for a new Snake prototype
+function Snake(snakeName) {
+ this.name = snakeName;
+}</p>
+<p>// Snake will inherit its prototype attributes / prototype object from the Reptile constructor in addition to its own
+Snake.prototype = new Reptile();</p>
+<p>var rattlesnake = new Snake(&quot;rattlesnake&quot;);
+var cobra = new Snake(&quot;cobra&quot;);</p>
+<p>rattlesnake.showCharacteristics();
+cobra.showCharacteristics();</p>
+<p>// We can change the prototype property for reproduction on this cobra instance but it will still be the same for other instances of the Snake / Reptile class
+rattlesnake.reproduction = &apos;live birth&apos;;</p>
+<p>rattlesnake.showCharacteristics();
+cobra.showCharacteristics();
+```</p>
+</li>
+<li>Note that <code>showCharacteristics</code> was inherited by <code>cobra</code> and <code>rattlesnake</code> even though they were defined way up in Reptile. The prototype properties still got passed down the parent-child hierarchy!</li>
+</ul>
+</li>
+<li><strong>Prototype attribute</strong>: great for accessing the properties and methods on objects<ul>
+<li>Also called the <strong>prototype object</strong>. This is the &quot;parent&quot; object from where the inherited properties were originally defined.<ul>
+<li>In the example above, the prototype attribute / object of <code>Snake</code> is <code>Reptile</code> and all its associated prototype properties.</li>
+</ul>
+</li>
+<li>If you want to access the property of an object, start on the object itself. Not there? The Javascript runtime will move one up the chain and look on the object&apos;s prototype. It will continue to move up the prototype hierarchy chain, from the &apos;father&apos; to the &apos;grandfather&apos; to the &apos;great-grandfather&apos;. If it&apos;s not found, then the property does not exist and <code>undefined</code> is returned.</li>
+<li>The ancestor to all Objects is <code>Object.prototype</code>. For example: <code>hasOwnProperty()</code>, <code>isPrototypeOf()</code>, <code>propertyIsEnumerable()</code>, <code>toLocaleString()</code>, <code>toString()</code>, and <code>valueOf()</code><ul>
+<li>All built-in constructors (<code>Array ()</code>, <code>Number ()</code>, <code>String ()</code>, etc.) were created from the Object constructor, and as such their prototype is Object.prototype.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="sources">Sources</h3>
+<ul>
+<li><a href="http://javascriptissexy.com/javascript-prototype-in-plain-detailed-language/" target="_blank">Javascript Prototype in plain Language - Javascript is Sexy</a></li>
+<li><a href="http://tobyho.com/2010/11/22/javascript-constructors-and/" target="_blank">Javascript Constructors and Prototypes - Toby Ho</a></li>
+<li><a href="https://wdi_sea.gitbooks.io/notes/content/02-js-jquery/js-prototypes/03prototypes.html" target="_blank">Prototypes - General Assembly WDI</a></li>
+<li><a href="http://stackoverflow.com/questions/9959727/proto-vs-prototype-in-javascript" target="_blank"><strong>Proto</strong> vs Prototype - StackOverflow</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="javascript-objects.html" class="navigation navigation-prev " aria-label="Previous page: Objects">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="javascript-scope-and-hoisting.html" class="navigation navigation-next " aria-label="Next page: Scope and Hoisting">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Prototypes","level":"1.2.2","depth":2,"next":{"title":"Scope and Hoisting","level":"1.2.3","depth":2,"path":"javascript/javascript-scope-and-hoisting.md","ref":"javascript/javascript-scope-and-hoisting.md","articles":[]},"previous":{"title":"Objects","level":"1.2.1","depth":2,"path":"javascript/javascript-objects.md","ref":"javascript/javascript-objects.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","codeblock-disable-glossary","livereload"],"pluginsConfig":{"livereload":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"codeblock-disable-glossary":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"readme.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"javascript/javascript-prototypes.md","mtime":"2017-04-03T01:17:51.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-04-08T21:54:43.150Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-codeblock-disable-glossary/disable-glossary.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
