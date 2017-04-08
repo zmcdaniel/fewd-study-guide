@@ -79,17 +79,17 @@ Here is another example of a variable that seems like it should be local, but is
 for (var i = 1; i <= 5; i++) {
 	console.log (i); // outputs 1, 2, 3, 4, 5
 };
-​
-​// The variable i is a global variable and it is accessible in the 
+
+// The variable i is a global variable and it is accessible in the
 // following function with the last value it was assigned above ​
-​function aNumber () {
+function aNumber () {
     console.log(i);
 }
-​
-​// The variable i in the aNumber function below is the global variable 
-// i that was changed in the for loop above. Its last value was 6, set 
-// just before the for loop exited:​
-aNumber ();  // 6​
+
+// The variable i in the aNumber function below is the global variable
+// i that was changed in the for loop above. Its last value was 6, set
+// just before the for loop exited:
+aNumber ();  // 6
 ```
 
 ### setTimeout Variables are Executed in the Global Scope
@@ -125,7 +125,7 @@ function getName1(){
 }
 
 // THE GOOD WAY
-function getName1() {
+function getName2() {
     var name = "Steve", age = "25";
     return name, "is", age;
 }
@@ -177,12 +177,12 @@ console.log(typeof beans); // function, because functions are more important to 
 Watch out though, because in this situation, the variable has an assignment and will override the function.
 
 ```javascript
-var beans = "Pinto";
-function beans() {
-    return "Great Northern";
+var moreBeans = "Pinto";
+function moreBeans() {
+    return "Kidney";
 }
 
-console.log(typeof beans); // string
+console.log(typeof moreBeans); // string
 ```
 
 Note also that a function expression (`var beans = function() { return "Great Northern"; }`) will not be hoisted.
